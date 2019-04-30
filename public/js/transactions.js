@@ -2,7 +2,7 @@ $(document).ready(function() {
   // Getting jQuery references to the transaction description, amount, form, and source select
   var descriptionInput = $("#description");
   var amountInput = $("#amount");
-  var dateInput = $("#date");
+  var dateInput = $("#datepicker");
   var transactionForm = $("#transaction");
   var sourceSelect = $("#source");
   // Adding an event listener for when the form is submitted
@@ -44,8 +44,8 @@ $(document).ready(function() {
         .val()
         .trim(),
       date: dateInput
-        .val()
-        .trim(),
+        .val(),
+        // .trim(),
       SourceId: sourceSelect.val()
     };
 
