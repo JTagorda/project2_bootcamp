@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  // Getting jQuery references to the transaction body, title, form, and source select
+  // Getting jQuery references to the transaction description, amount, form, and source select
   var descriptionInput = $("#description");
   var amountInput = $("#amount");
+  var dateInput = $("#date");
   var transactionForm = $("#transaction");
   var sourceSelect = $("#source");
   // Adding an event listener for when the form is submitted
@@ -19,7 +20,7 @@ $(document).ready(function() {
     transactionId = url.split("=")[1];
     gettransactionData(transactionId, "transaction");
   }
-  // Otherwise if we have an source_id in our url, preset the source select box to be our Author
+  // Otherwise if we have an source_id in our url, preset the source select box to be our Source
   else if (url.indexOf("?source_id=") !== -1) {
     sourceId = url.split("=")[1];
   }
@@ -30,7 +31,7 @@ $(document).ready(function() {
   // A function for handling what happens when the form to create a new transaction is submitted
   function handleFormSubmit(event) {
     event.preventDefault();
-    // Wont submit the transaction if we are missing a body, title, or source
+    // Wont submit the transaction if we are missing a description, amount, or source
     if (!amountInput.val().trim() || !descriptionInput.val().trim() || !sourceSelect.val()) {
       return;
     }
@@ -42,7 +43,10 @@ $(document).ready(function() {
       description: descriptionInput
         .val()
         .trim(),
-      sourceId: sourceSelect.val()
+      date: dateInput
+        .val()
+        .trim(),
+      SourceId: sourceSelect.val()
     };
 
     // If we're updating a transaction run updatetransaction to update a transaction
@@ -56,10 +60,10 @@ $(document).ready(function() {
     }
   }
 
-  // Submits a new transaction and brings user to blog page upon completion
+  // Submits a new transaction and brings user to home page upon completion
   function submittransaction(transaction) {
-    $.transaction("/api/transactions", transaction, function() {
-      window.location.href = "/blog";
+    $.post("/api/transactions", transaction, function() {
+      window.location.href = "/home";
     });
   }
 
@@ -67,11 +71,11 @@ $(document).ready(function() {
   function gettransactionData(id, type) {
     var queryUrl;
     switch (type) {
-    case "transaction":
+    case "transactions":
       queryUrl = "/api/transactions/" + id;
       break;
-    case "source":
-      queryUrl = "/api/Sources/" + id;
+    case "sources":
+      queryUrl = "/api/sources/" + id;
       break;
     default:
       return;
@@ -79,9 +83,10 @@ $(document).ready(function() {
     $.get(queryUrl, function(data) {
       if (data) {
         console.log(data.sourceId || data.id);
-        // If this transaction exists, prefill our cms forms with its data
-        titleInput.val(data.title);
-        bodyInput.val(data.body);
+        // If this transaction exists, prefill our Transactions forms with its data
+        amountInput.val(data.amount);
+        descriptionInput.val(data.description);
+        dateInput.val(data.date);
         sourceId = data.sourceId || data.id;
         // If we have a transaction with this id, set a flag for us to know to update the transaction
         // when we hit submit
@@ -92,24 +97,24 @@ $(document).ready(function() {
 
   // A function to get Sources and then render our list of Sources
   function getSources() {
-    $.get("/api/Sources", renderSourceList);
+    $.get("/api/sources", renderSourceList);
   }
   // Function to either render a list of Sources, or if there are none, direct the user to the page
   // to create an source first
   function renderSourceList(data) {
     if (!data.length) {
-      window.location.href = "/Sources";
+      window.location.href = "/sources";
     }
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
       rowsToAdd.push(createSourceRow(data[i]));
     }
-    Sourceselect.empty();
+    sourceSelect.empty();
     console.log(rowsToAdd);
-    console.log(Sourceselect);
-    Sourceselect.append(rowsToAdd);
-    Sourceselect.val(sourceId);
+    console.log(sourceSelect);
+    sourceSelect.append(rowsToAdd);
+    sourceSelect.val(sourceId);
   }
 
   // Creates the source options in the dropdown
@@ -120,7 +125,7 @@ $(document).ready(function() {
     return listOption;
   }
 
-  // Update a given transaction, bring user to the blog page when done
+  // Update a given transaction, bring user to the home page when done
   function updatetransaction(transaction) {
     $.ajax({
       method: "PUT",
@@ -128,7 +133,7 @@ $(document).ready(function() {
       data: transaction
     })
       .then(function() {
-        window.location.href = "/blog";
+        window.location.href = "/home";
       });
   }
 });

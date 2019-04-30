@@ -26,8 +26,8 @@ $(document).ready(function() {
 
 
   // This function grabs transactions from the database and updates the view
-  function getTransactions(Source) {
-    sourceId = Source || "";
+  function getTransactions(source) {
+    sourceId = source || "";
     if (sourceId) {
       sourceId = "/?source_id=" + sourceId;
     }
@@ -35,7 +35,7 @@ $(document).ready(function() {
       console.log("Transactions", data);
       transactions = data;
       if (!transactions || !transactions.length) {
-        displayEmpty(Source);
+        displayEmpty(source);
       }
       else {
         initializeRows();
@@ -78,10 +78,10 @@ $(document).ready(function() {
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-info");
-    var newTransactionTitle = $("<h2>");
+    var newTransactionDescription = $("<h2>");
     var newTransactionDate = $("<small>");
     var newTransactionSource = $("<h5>");
-    newTransactionSource.text("Written by: " + transaction.Source.name);
+    newTransactionSource.text("Source: " + transaction.Source.name);
     newTransactionSource.css({
       float: "right",
       color: "blue",
@@ -91,13 +91,13 @@ $(document).ready(function() {
     var newTransactionCardBody = $("<div>");
     newTransactionCardBody.addClass("card-body");
     var newTransactionBody = $("<p>");
-    newTransactionTitle.text(transaction.title + " ");
-    newTransactionBody.text(transaction.body);
+    newTransactionDescription.text(transaction.description + " ");
+    newTransactionBody.text(transaction.amount);
     newTransactionDate.text(formattedDate);
-    newTransactionTitle.append(newTransactionDate);
+    newTransactionDescription.append(newTransactionDate);
     newTransactionCardHeading.append(deleteBtn);
     newTransactionCardHeading.append(editBtn);
-    newTransactionCardHeading.append(newTransactionTitle);
+    newTransactionCardHeading.append(newTransactionDescription);
     newTransactionCardHeading.append(newTransactionSource);
     newTransactionCardBody.append(newTransactionBody);
     newTransactionCard.append(newTransactionCardHeading);
@@ -121,7 +121,7 @@ $(document).ready(function() {
       .parent()
       .parent()
       .data("transaction");
-    window.location.href = "/cms?Transaction_id=" + currentTransaction.id;
+    window.location.href = "/transactions?Transaction_id=" + currentTransaction.id;
   }
 
   // This function displays a message when there are no transactions
@@ -134,7 +134,7 @@ $(document).ready(function() {
     homecontainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No transactions yet" + partial + ", navigate <a href='/cms" + query +
+    messageH2.html("No transactions yet" + partial + ", navigate <a href='/transactions" + query +
     "'>here</a> in order to get started.");
     homecontainer.append(messageH2);
   }

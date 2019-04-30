@@ -20,10 +20,10 @@ module.exports = function(app) {
     }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.IncomeSource
+    // In this case, just db.Source
     db.Transaction.findAll({
       where: query,
-      include: [db.IncomeSource]
+      include: [db.Source]
     }).then(function(dbTransaction) {
       res.json(dbTransaction);
     });
@@ -33,12 +33,12 @@ module.exports = function(app) {
   app.get("/api/transactions/:id", function(req, res) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.IncomeSource
+    // In this case, just db.Source
     db.Transaction.findOne({
       where: {
         id: req.params.id
       },
-      include: [db.IncomeSource]
+      include: [db.Source]
     }).then(function(dbTransaction) {
       res.json(dbTransaction);
     });
