@@ -1,3 +1,9 @@
+// *********************************************************************************
+// html-routes.js - this file offers a set of routes for sending users to the various html pages
+// *********************************************************************************
+
+// Dependencies
+// =============================================================
 var path = require("path");
 
 // Routes
@@ -8,22 +14,22 @@ module.exports = function(app) {
 
   // index route loads view.html
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/indez.html"));
+    res.sendFile(path.join(__dirname, "../public/home.html"));
   });
 
-//   // cms route loads cms.html
-//   app.get("/cms", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/cms.html"));
-//   });
+  // transaction route loads transactions.html
+  app.get("/transactions", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/transactions.html"));
+  });
 
-//   // blog route loads blog.html
-//   app.get("/blog", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/blog.html"));
-//   });
+  // home route loads home.html
+  app.get("/home", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/home.html"));
+  });
 
-//   // authors route loads author-manager.html
-//   app.get("/authors", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/author-manager.html"));
-//   });
+  // source route loads author-manager.html
+  app.get("/source", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/source.html"));
+  });
 
 };
