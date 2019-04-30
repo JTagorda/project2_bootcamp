@@ -1,6 +1,8 @@
-var express = require("express");
-
-// Sets up the Express App
+// *****************************************************************************
+// Server.js - This file is the initial starting point for the Node/Express server.
+//
+// ******************************************************************************
+// *** Dependencies
 // =============================================================
 var express = require("express");
 
@@ -8,7 +10,6 @@ var express = require("express");
 // =============================================================
 var app = express();
 var PORT = process.env.PORT || 8080;
-
 // Requiring our models for syncing
 var db = require("./models");
 
@@ -21,7 +22,9 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
+require("./routes/source-api.js")(app);
+require("./routes/transaction-api.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
