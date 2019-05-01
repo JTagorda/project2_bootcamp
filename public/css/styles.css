@@ -45,3 +45,10 @@ button.edit {
 .top-30 {
   margin-top: 30px;
 }
+
+#ui-datepicker-div {
+  background: white;
+}
+.ui-icon {
+  padding: 10px;
+}

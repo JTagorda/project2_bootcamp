@@ -69,25 +69,28 @@ $(document).ready(function() {
 
   // Gets transaction data for the current transaction if we're editing, or if we're adding to an source's existing transactions
   function gettransactionData(id, type) {
+    console.log(id);
+    // console.log("test");
     var queryUrl;
     switch (type) {
-    case "transactions":
+    case "transaction":
       queryUrl = "/api/transactions/" + id;
       break;
-    case "sources":
+    case "source":
       queryUrl = "/api/sources/" + id;
       break;
     default:
       return;
     }
     $.get(queryUrl, function(data) {
+      console.log(data.SourceId);
       if (data) {
-        console.log(data.sourceId || data.id);
+        // console.log(data.sourceId || data.id);
         // If this transaction exists, prefill our Transactions forms with its data
         amountInput.val(data.amount);
         descriptionInput.val(data.description);
         dateInput.val(data.date);
-        sourceId = data.sourceId || data.id;
+        sourceId = data.SourceId || data.id;
         // If we have a transaction with this id, set a flag for us to know to update the transaction
         // when we hit submit
         updating = true;
@@ -111,8 +114,8 @@ $(document).ready(function() {
       rowsToAdd.push(createSourceRow(data[i]));
     }
     sourceSelect.empty();
-    console.log(rowsToAdd);
-    console.log(sourceSelect);
+    // console.log(rowsToAdd);
+    // console.log(sourceSelect);
     sourceSelect.append(rowsToAdd);
     sourceSelect.val(sourceId);
   }

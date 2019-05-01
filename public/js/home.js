@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   // homecontainer holds all of our transactions
   var homecontainer = $(".home-container");
-  // var TransactionCategorySelect = $("#category");
+  var TransactionCategorySelect = $("#category");
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handleTransactionDelete);
   $(document).on("click", "button.edit", handleTransactionEdit);
@@ -32,7 +32,7 @@ $(document).ready(function() {
       sourceId = "/?source_id=" + sourceId;
     }
     $.get("/api/transactions" + sourceId, function(data) {
-      console.log("Transactions", data);
+      // console.log("transactions", data);
       transactions = data;
       if (!transactions || !transactions.length) {
         displayEmpty(source);
@@ -44,15 +44,15 @@ $(document).ready(function() {
   }
 
   // This function does an API call to delete transactions
-  // function deleteTransaction(id) {
-  //   $.ajax({
-  //     method: "DELETE",
-  //     url: "/api/transactions/" + id
-  //   })
-  //     .then(function() {
-  //       getTransactions(TransactionCategorySelect.val());
-  //     });
-  // }
+  function deleteTransaction(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/transactions/" + id
+    })
+      .then(function() {
+        getTransactions(TransactionCategorySelect.val());
+      });
+  }
 
   // InitializeRows handles appending all of our constructed transaction HTML inside homecontainer
   function initializeRows() {
@@ -121,7 +121,7 @@ $(document).ready(function() {
       .parent()
       .parent()
       .data("transaction");
-    window.location.href = "/transactions?Transaction_id=" + currentTransaction.id;
+    window.location.href = "/transactions?transaction_id=" + currentTransaction.id;
   }
 
   // This function displays a message when there are no transactions
