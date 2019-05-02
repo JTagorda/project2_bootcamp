@@ -108,14 +108,17 @@ $(document).ready(function() {
   }
 */
   function createNewRow(transaction) {
+	 console.log(transaction);
     var formattedDate = new Date(transaction.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     var newTransactionTable = $("<tr>");
     //newTransactionCard.addClass("card");
     var deleteBtn = $("<button>");
+	//deleteBtn.data('transaction', transaction.id)
     deleteBtn.text("x");
     deleteBtn.addClass("delete btn btn-danger");
     var editBtn = $("<button>");
+	//editBtn.data('transaction', transaction.id);
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-info");
     
@@ -123,8 +126,8 @@ $(document).ready(function() {
     var newTransactionSource = $("<td>");
     var newTransactionDescription = $("<td>");
     var newTransactionAmount = $("<td>");
-    var newTransactionEdit = $("<td>");
-    var newTransactionDelete = $("<td>");
+    //var newTransactionEdit = $("<td>");
+    //var newTransactionDelete = $("<td>");
 	  
     newTransactionDate.text(formattedDate);
 	newTransactionSource.text(transaction.Source.name);
@@ -148,16 +151,17 @@ $(document).ready(function() {
   // This function figures out which transaction we want to delete and then calls deleteTransaction
   function handleTransactionDelete() {
     var currentTransaction = $(this)
-      .parent()
+//      .parent()
       .parent()
       .data("transaction");
+	  console.log(currentTransaction);
     deleteTransaction(currentTransaction.id);
   }
 
   // This function figures out which transaction we want to edit and takes it to the appropriate url
   function handleTransactionEdit() {
     var currentTransaction = $(this)
-      .parent()
+//      .parent()
       .parent()
       .data("transaction");
     window.location.href = "/transactions?transaction_id=" + currentTransaction.id;
