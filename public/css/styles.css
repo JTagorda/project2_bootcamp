@@ -1,3 +1,13 @@
+.side-nav a {
+	height: 90px;
+
+}
+
+
+/* Original CSS */
+
+/*
+
 button.submit {
   float: right;
 }
@@ -44,4 +54,12 @@ button.edit {
 
 .top-30 {
   margin-top: 30px;
+}
+*/
+
+#ui-datepicker-div {
+  background: white;
+}
+.ui-icon {
+  padding: 10px;
 }

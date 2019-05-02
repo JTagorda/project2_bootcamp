@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   // homecontainer holds all of our transactions
   var homecontainer = $(".home-container");
-  // var TransactionCategorySelect = $("#category");
+  var TransactionCategorySelect = $("#category");
   // Click events for the edit and delete buttons
   $(document).on("click", "button.delete", handleTransactionDelete);
   $(document).on("click", "button.edit", handleTransactionEdit);
@@ -32,7 +32,7 @@ $(document).ready(function() {
       sourceId = "/?source_id=" + sourceId;
     }
     $.get("/api/transactions" + sourceId, function(data) {
-      console.log("Transactions", data);
+      // console.log("transactions", data);
       transactions = data;
       if (!transactions || !transactions.length) {
         displayEmpty(source);
@@ -44,15 +44,15 @@ $(document).ready(function() {
   }
 
   // This function does an API call to delete transactions
-  // function deleteTransaction(id) {
-  //   $.ajax({
-  //     method: "DELETE",
-  //     url: "/api/transactions/" + id
-  //   })
-  //     .then(function() {
-  //       getTransactions(TransactionCategorySelect.val());
-  //     });
-  // }
+  function deleteTransaction(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/transactions/" + id
+    })
+      .then(function() {
+        getTransactions(TransactionCategorySelect.val());
+      });
+  }
 
   // InitializeRows handles appending all of our constructed transaction HTML inside homecontainer
   function initializeRows() {
@@ -65,6 +65,7 @@ $(document).ready(function() {
   }
 
   // This function constructs a transaction's HTML
+/*
   function createNewRow(transaction) {
     var formattedDate = new Date(transaction.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
@@ -105,23 +106,65 @@ $(document).ready(function() {
     newTransactionCard.data("transaction", transaction);
     return newTransactionCard;
   }
+*/
+  function createNewRow(transaction) {
+	 console.log(transaction);
+    var formattedDate = new Date(transaction.createdAt);
+    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+    var newTransactionTable = $("<tr>");
+    //newTransactionCard.addClass("card");
+    var deleteBtn = $("<button>");
+	//deleteBtn.data('transaction', transaction.id)
+    deleteBtn.text("x");
+    deleteBtn.addClass("delete btn btn-danger");
+    var editBtn = $("<button>");
+	//editBtn.data('transaction', transaction.id);
+    editBtn.text("EDIT");
+    editBtn.addClass("edit btn btn-info");
+    
+	var newTransactionDate = $("<td>");
+    var newTransactionSource = $("<td>");
+    var newTransactionDescription = $("<td>");
+    var newTransactionAmount = $("<td>");
+    //var newTransactionEdit = $("<td>");
+    //var newTransactionDelete = $("<td>");
+	  
+    newTransactionDate.text(formattedDate);
+	newTransactionSource.text(transaction.Source.name);
+    newTransactionDescription.text(transaction.description + " ");
+    newTransactionAmount.text(transaction.amount);
+    //newTransactionEdit.text(editBtn);
+    //newTransactionDelete.text(deleteBtn);
+	  
+    newTransactionTable.append(newTransactionDate);
+    newTransactionTable.append(newTransactionSource);
+    newTransactionTable.append(newTransactionDescription);
+    newTransactionTable.append(newTransactionAmount);
+    newTransactionTable.append(deleteBtn);
+    newTransactionTable.append(editBtn);
+	  
+    newTransactionTable.data("transaction", transaction);
+	  
+    return newTransactionTable;
+  }
 
   // This function figures out which transaction we want to delete and then calls deleteTransaction
   function handleTransactionDelete() {
     var currentTransaction = $(this)
-      .parent()
+//      .parent()
       .parent()
       .data("transaction");
+	  console.log(currentTransaction);
     deleteTransaction(currentTransaction.id);
   }
 
   // This function figures out which transaction we want to edit and takes it to the appropriate url
   function handleTransactionEdit() {
     var currentTransaction = $(this)
-      .parent()
+//      .parent()
       .parent()
       .data("transaction");
-    window.location.href = "/transactions?Transaction_id=" + currentTransaction.id;
+    window.location.href = "/transactions?transaction_id=" + currentTransaction.id;
   }
 
   // This function displays a message when there are no transactions
