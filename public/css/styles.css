@@ -2,7 +2,9 @@
 	height: 90px;
 
 }
-
+.table td, .select-wrapper input.select-dropdown {
+	color: white;
+}
 
 /* Original CSS */
 

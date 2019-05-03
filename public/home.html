@@ -83,9 +83,11 @@
 
       <div class="d-flex change-mode">
 
+<!--
         <div class="ml-auto mb-0 mr-3 change-mode-wrapper">
           <button class="btn btn-outline-black btn-sm" id="dark-mode">Change Mode</button>
         </div>
+-->
 
         <!-- Navbar links -->
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
@@ -360,10 +362,12 @@
 
         $('footer, .card').toggleClass('dark-card-admin');
         $('body, .navbar').toggleClass('white-skin navy-blue-skin');
-        $(this).toggleClass('white text-dark btn-outline-black');
+        //$(this).toggleClass('white text-dark btn-outline-black');
         $('body').toggleClass('dark-bg-admin');
-        $('h6, .card, p, td, th, i, li a, h4, input, label').not(
-          '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+        //$('h6, .card, p, td, th, i, li a, h4, input, label').not(
+        //  '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+        $('h6, .card, p, td, th, li a, h4, input, label, .table').addClass('text-white');
+        $('.dropdown-item i, .dropdown-item').toggleClass('text-dark');
         $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
         $('.gradient-card-header').toggleClass('white black lighten-4');
         $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
