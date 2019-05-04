@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Transaction = sequelize.define("Transaction", {
     amount: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: false,
       validate: {
         len: [1]
