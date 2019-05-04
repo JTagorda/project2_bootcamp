@@ -1,5 +1,6 @@
 $(document).ready(function() {
   // Getting jQuery references to the transaction description, amount, form, and source select
+
   var descriptionInput = $("#description");
   var amountInput = $("#amount");
   var dateInput = $("#datepicker");
@@ -10,7 +11,7 @@ $(document).ready(function() {
   // Gets the part of the url that comes after the "?" (which we have if we're updating a transaction)
   var url = window.location.search;
   var transactionId;
-  var sourceId;
+  var sourceIdT;
   // Sets a flag for whether or not we're updating a transaction to be false initially
   var updating = false;
 
@@ -22,11 +23,11 @@ $(document).ready(function() {
   }
   // Otherwise if we have an source_id in our url, preset the source select box to be our Source
   else if (url.indexOf("?source_id=") !== -1) {
-    sourceId = url.split("=")[1];
+    sourceIdT = url.split("=")[1];
   }
 
   // Getting the Sources, and their transactions
-  getSources();
+  getSourcesT();
 
   // A function for handling what happens when the form to create a new transaction is submitted
   function handleFormSubmit(event) {
@@ -46,7 +47,7 @@ $(document).ready(function() {
       date: dateInput
         .val(),
         // .trim(),
-      SourceId: sourceSelect.val()
+      sourceIdT: sourceSelect.val()
     };
 
     // If we're updating a transaction run updatetransaction to update a transaction
@@ -83,14 +84,14 @@ $(document).ready(function() {
       return;
     }
     $.get(queryUrl, function(data) {
-      console.log(data.SourceId);
+      console.log(data.sourceIdT);
       if (data) {
         // console.log(data.sourceId || data.id);
         // If this transaction exists, prefill our Transactions forms with its data
         amountInput.val(data.amount);
         descriptionInput.val(data.description);
         dateInput.val(data.date);
-        sourceId = data.SourceId || data.id;
+        sourceIdT = data.sourceIdT || data.id;
         // If we have a transaction with this id, set a flag for us to know to update the transaction
         // when we hit submit
         updating = true;
@@ -99,29 +100,29 @@ $(document).ready(function() {
   }
 
   // A function to get Sources and then render our list of Sources
-  function getSources() {
-    $.get("/api/sources", renderSourceList);
+  function getSourcesT() {
+    $.get("/api/sources", renderSourceListT);
   }
   // Function to either render a list of Sources, or if there are none, direct the user to the page
   // to create an source first
-  function renderSourceList(data) {
+  function renderSourceListT(data) {
     if (!data.length) {
       window.location.href = "/sources";
     }
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
-      rowsToAdd.push(createSourceRow(data[i]));
+      rowsToAdd.push(createSourceRowT(data[i]));
     }
     sourceSelect.empty();
     // console.log(rowsToAdd);
     // console.log(sourceSelect);
     sourceSelect.append(rowsToAdd);
-    sourceSelect.val(sourceId);
+    sourceSelect.val(sourceIdT);
   }
 
   // Creates the source options in the dropdown
-  function createSourceRow(source) {
+  function createSourceRowT(source) {
     var listOption = $("<option>");
     listOption.attr("value", source.id);
     listOption.text(source.name);
@@ -139,4 +140,5 @@ $(document).ready(function() {
         window.location.href = "/home";
       });
   }
+	
 });

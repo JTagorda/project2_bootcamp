@@ -47,15 +47,20 @@
 		  
         <!-- Side navigation links -->
         <li>
-          <ul class="collapsible collapsible-accordion">
-            <li>
-              <a href="/transactions" class="collapsible-header waves-effect">
-				  <i class="w-fa far fa-check-square"></i>New Transactions
+          <ul class="nav md-tabs collapsible collapsible-accordion">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">
+				  <i class="w-fa far fa-check-square"></i>Dashboard
 			  </a>
             </li>
-            <li>
-              <a href="/source" class="collapsible-header waves-effect">
-				  <i class="w-fa fas fa-th"></i>Manage Resources
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">
+				  <i class="w-fa far fa-check-square"></i>Manage Resources
+			  </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#panel3" role="tab">
+				  <i class="w-fa fas fa-th"></i>New Transactions
 			  </a>
             </li>
 
@@ -150,8 +155,11 @@
   <!-- Main layout -->
   <main>
 
-    <div class="container-fluid">
+    <div class="tab-content container-fluid">
 
+      <!-- Section: data tables -->
+      <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+		  
 		<!-- Top Table UI -->
 		<div class="card p-2 mb-5">
 
@@ -221,9 +229,6 @@
 
 		</div>
 		<!-- Top Table UI -->
-		
-      <!-- Section: data tables -->
-      <section class="pb-3">
 
         <!-- Grid row -->
         <div class="row">
@@ -254,46 +259,6 @@
                       </tr>
                     </thead>
                     <tbody class="data home-container">
-                      <tr>
-                        <td><span class="badge green">April 30th 2019, 1:08:19 pm</span></td>
-                        <td>Uber</td>
-                        <td>John Doe</td>
-                        <td class="hour">
-                          <span class="grey-text">
-                            <i class="far fa-clock-o" aria-hidden="true"></i> $100
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="badge green">May 1st 2019, 6:18:29 pm</span></td>
-                        <td>GrubHub</td>
-                        <td>John Doe</td>
-                        <td class="hour">
-                          <span class="grey-text">
-                            <i class="far fa-clock-o" aria-hidden="true"></i> $100
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="badge warning-color">April 25th 2019, 3:08:19 pm</span></td>
-                        <td>Lyft</td>
-                        <td>John Doe</td>
-                        <td class="hour">
-                          <span class="grey-text">
-                            <i class="far fa-clock-o" aria-hidden="true"></i> $100
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><span class="badge red">April 28th 2019, 12:08:19 pm</span></td>
-                        <td>Starbucks</td>
-                        <td>John Doe</td>
-                        <td class="hour">
-                          <span class="grey-text">
-                            <i class="far fa-clock-o" aria-hidden="true"></i> $100
-                          </span>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -309,8 +274,120 @@
         </div>
         <!-- Grid row -->
 
-      </section>
+      </div>
       <!-- Section: data tables -->
+		
+      <!-- Source Section: data tables -->
+      <div class="tab-pane fade" id="panel2" role="tabpanel">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-lg-12 col-md-12">
+
+            <!-- Panel -->
+            <div class="card mb-lg-0 mb-4">
+
+              <div class="card-header white-text primary-color">
+                <h5 class="font-weight-500 my-1">Sources</h5>
+              </div>
+
+              <div class="card-body">
+
+				<div class="source-container">
+					<h1>Income Sources</h1>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th># of Transactions</th>
+								<th>See Source's Transactions</th>
+								<th>New Transaction</th>
+								<th>Delete Source</th>
+							</tr>
+						</thead>
+						<tbody id="source-tbody">
+							<tr id="form-row">
+								<form id="source-form">
+									<td colspan="4">
+										<input placeholder="Enter a source" id="source-name" type="text" />
+									</td>
+									<td><button type="submit" class="btn btn-success">Create Source</button>
+									</td>
+								</form>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+              </div>
+
+            </div>
+            <!-- Panel -->
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Source Section: data tables -->
+		
+      <!-- Source Section: data tables -->
+      <div class="tab-pane fade" id="panel3" role="tabpanel">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-lg-12 col-md-12">
+
+            <!-- Panel -->
+            <div class="card mb-lg-0 mb-4">
+
+              <div class="card-header white-text primary-color">
+                <h5 class="font-weight-500 my-1">New Transaction</h5>
+              </div>
+
+              <div class="card-body">
+
+				<form id="transaction">
+					<div class="form-group">
+						<label for="Amount">Amount:</label>
+						<input placeholder="Dollar Amount" type="text" class="form-control" id="amount">
+						<br />
+						<label for="Description">Description: </label>
+						<textarea placeholder="Description" class="form-control" rows="4" id="description"></textarea>
+						<br>
+						<div class="form-group">
+							<label for="date">Date:</label>
+							<br>
+							<input type="text" id="datepicker">
+							<!-- <textarea placeholder="Date (mm/dd/yy)" class="form-control" rows="1" id="date"></textarea> -->
+							<div class="form-group">
+								<br>
+								<label for="category">Select Income Source: </label>
+								<select id="source">
+								</select>
+							</div>
+							<br />
+							<button type="submit" class="btn btn-success submit">Submit</button>
+						</div>
+					</div>
+				</form>				
+
+            </div>
+            <!-- Panel -->
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Source Section: data tables -->
     </div>
 
   </main>
@@ -341,7 +418,12 @@
 
   <!-- Custom Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/home.js" type="text/javascript"></script>
+  <script src="js/sources.js" type="text/javascript"></script>
+
+  <script src="js/transactions.js" type="text/javascript"></script>
+<!--      -->
 	
   <!-- Initializations -->
   <script>
@@ -366,11 +448,13 @@
         $('body').toggleClass('dark-bg-admin');
         //$('h6, .card, p, td, th, i, li a, h4, input, label').not(
         //  '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
-        $('h6, .card, p, td, th, li a, h4, input, label, .table').addClass('text-white');
+        $('h6, .card, p, td, th, li a, h4, label, .table').addClass('text-white');
         $('.dropdown-item i, .dropdown-item').toggleClass('text-dark');
         $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
         $('.gradient-card-header').toggleClass('white black lighten-4');
         $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
+		
+	 	$( "#datepicker" ).datepicker();
 
     //  });
     });
@@ -379,6 +463,5 @@
       $('.mdb-select').material_select();
     });
   </script>
-
 </body>
 </html>

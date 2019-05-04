@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Getting references to the name input and source container, as well as the table body
   var nameInput = $("#source-name");
-  var sourceList = $("tbody");
+  var sourceList = $("#source-tbody");
   var sourceContainer = $(".source-container");
   // Adding event listeners to the form to create a new object, and the button to delete
   // an source

@@ -2,10 +2,20 @@
 	height: 90px;
 
 }
-.table td, .select-wrapper input.select-dropdown {
+.table td, 
+.table.table a,
+.select-wrapper input.select-dropdown {
 	color: white;
 }
 
+.md-tabs {
+	background-color: transparent;
+}
+
+select {
+	display: block !important;
+	width: 25%;
+}
 /* Original CSS */
 
 /*
