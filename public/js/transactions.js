@@ -1,5 +1,7 @@
-$(document).ready(function() {
+//$(document).ready(function() {
   // Getting jQuery references to the transaction description, amount, form, and source select
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function() {
 
   var descriptionInput = $("#description");
   var amountInput = $("#amount");
@@ -11,7 +13,7 @@ $(document).ready(function() {
   // Gets the part of the url that comes after the "?" (which we have if we're updating a transaction)
   var url = window.location.search;
   var transactionId;
-  var sourceIdT;
+  var sourceId;
   // Sets a flag for whether or not we're updating a transaction to be false initially
   var updating = false;
 
@@ -23,7 +25,7 @@ $(document).ready(function() {
   }
   // Otherwise if we have an source_id in our url, preset the source select box to be our Source
   else if (url.indexOf("?source_id=") !== -1) {
-    sourceIdT = url.split("=")[1];
+    sourceId = url.split("=")[1];
   }
 
   // Getting the Sources, and their transactions
@@ -46,8 +48,8 @@ $(document).ready(function() {
         .trim(),
       date: dateInput
         .val(),
-        // .trim(),
-      sourceIdT: sourceSelect.val()
+        //.trim(),
+      SourceId: sourceSelect.val()
     };
 
     // If we're updating a transaction run updatetransaction to update a transaction
@@ -84,14 +86,14 @@ $(document).ready(function() {
       return;
     }
     $.get(queryUrl, function(data) {
-      console.log(data.sourceIdT);
+      console.log(data.sourceId);
       if (data) {
         // console.log(data.sourceId || data.id);
         // If this transaction exists, prefill our Transactions forms with its data
         amountInput.val(data.amount);
         descriptionInput.val(data.description);
         dateInput.val(data.date);
-        sourceIdT = data.sourceIdT || data.id;
+        sourceId = data.sourceId || data.id;
         // If we have a transaction with this id, set a flag for us to know to update the transaction
         // when we hit submit
         updating = true;
@@ -118,7 +120,7 @@ $(document).ready(function() {
     // console.log(rowsToAdd);
     // console.log(sourceSelect);
     sourceSelect.append(rowsToAdd);
-    sourceSelect.val(sourceIdT);
+    sourceSelect.val(sourceId);
   }
 
   // Creates the source options in the dropdown

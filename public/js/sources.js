@@ -43,8 +43,10 @@ $(document).ready(function() {
     } else {
       newTr.append("<td>0</td>");
     }
-    newTr.append("<td><a href='/home?source_id=" + sourceData.id + "'>Go to Posts</a></td>");
-    newTr.append("<td><a href='/transactions?source_id=" + sourceData.id + "'>Create a Post</a></td>");
+    newTr.append("<td><a href='/home?source_id=" + sourceData.id + "'>Go to Transaction</a></td>");
+    //<a class="nav-link" data-toggle="tab" href="#panel3" role="tab">
+    //newTr.append("<td><a href='#panel3?source_id=" + sourceData.id + "' data-toggle='tab' role='tab'>Create a Transaction</a></td>");
+    newTr.append("<td><a href='/transactions?source_id=" + sourceData.id + "'>Create a Transaction</a></td>");
     newTr.append("<td><a style='cursor:pointer;color:red' class='delete-source'>Delete source</a></td>");
     return newTr;
   }
