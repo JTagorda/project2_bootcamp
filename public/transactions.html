@@ -2,34 +2,313 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Add Stransactions</title>
-	<!-- Latest compiled and minified CSS & JS -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<!-- Datepicker -->
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script>
-		$( function() {
-				$( "#datepicker" ).datepicker();
-			} );
-		</script>
-</head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>GigTracer-Track your hustle</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+  <style>
 
-<body>
-	<!-- <div class="container hidden"> -->
-		<div class="row top-30">
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/home">Go to Home</a>
-      </div>
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-light" href="/source">Manage Sources</a>
-      </div>
+  </style>
+</head>
+	
+<body class="fixed-sn white-skin">
+
+  <!-- Main Navigation -->
+  <header>
+
+    <!-- Sidebar navigation -->
+    <div id="slide-out" class="side-nav sn-bg-4 fixed">
+      <ul class="custom-scrollbar">
+
+        <!-- Logo -->
+        <li class="logo-sn waves-effect py-3">
+          <div class="text-center">
+            <a href="/" class="pl-0"><img src="images/logo.png"></a>
+          </div>
+        </li>
+
+        <!-- Search Form 
+        <li>
+          <form class="search-form" role="search">
+            <div class="md-form mt-0 waves-light">
+              <input type="text" class="form-control py-2" placeholder="Search">
+            </div>
+          </form>
+        </li>
+		-->
+		  
+        <!-- Side navigation links -->
+        <li>
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="nav-link active" href="/home">
+				  <i class="w-fa far fa-check-square"></i>Dashboard
+			  </a>
+            </li>
+<!--
+            <li>
+              <a class="nav-link" href="/home?#panel2">
+				  <i class="w-fa far fa-check-square"></i>Manage Resources
+			  </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/home?#panel3">
+				  <i class="w-fa fas fa-th"></i>New Transactions
+			  </a>
+            </li>
+-->
+
+          </ul>
+        </li>
+        <!-- Side navigation links -->
+
+      </ul>
+      <div class="sidenav-bg mask-strong"></div>
     </div>
-		<div class="row">
-			<div class="col-md-6 offset-md-3">
+    <!-- Sidebar navigation -->
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+
+      <!-- SideNav slide-out button -->
+      <div class="float-left">
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-dn mr-auto">
+        <p>Track your hustle - Dashboard</p>
+      </div>
+
+      <div class="d-flex change-mode">
+
+<!--
+        <div class="ml-auto mb-0 mr-3 change-mode-wrapper">
+          <button class="btn btn-outline-black btn-sm" id="dark-mode">Change Mode</button>
+        </div>
+-->
+
+        <!-- Navbar links -->
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown notifications-nav">
+            <a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <span class="badge red">3</span> <i class="fas fa-bell"></i>
+              <span class="d-none d-md-inline-block">Notifications</span>
+            </a>
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">
+                <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+                <span>New order received</span>
+                <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+                <span>New order received</span>
+                <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 33 min</span>
+              </a>
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-chart-line mr-2" aria-hidden="true"></i>
+                <span>Your campaign is about to end</span>
+                <span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 53 min</span>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect"><i class="fas fa-envelope"></i> <span
+                class="clearfix d-none d-sm-inline-block">Contact</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect"><i class="far fa-comments"></i> <span
+                class="clearfix d-none d-sm-inline-block">Support</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Profile</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#">Log Out</a>
+              <a class="dropdown-item" href="#">My account</a>
+            </div>
+          </li>
+
+        </ul>
+        <!-- Navbar links -->
+
+      </div>
+
+    </nav>
+    <!-- Navbar -->
+
+  </header>
+  <!-- Main Navigation -->
+
+  <!-- Main layout -->
+  <main>
+
+    <div class="container-fluid">
+
+      <!-- Section: Analytical panel -->
+      <section class="mt-md-4 pt-md-2 mb-5">
+
+          <!-- First row -->
+          <div class="row">
+  
+            <!-- First column -->
+            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+  
+              <!-- Card -->
+              <div class="card card-cascade cascading-admin-card">
+  
+                <!-- Card Data -->
+                <div class="admin-up">
+                  <i class="far fa-money-bill-alt primary-color mr-3 z-depth-2"></i>
+                  <div class="data">
+                    <p class="text-uppercase">Total</p>
+                    <h4 class="font-weight-bold "><span id="total"></span></h4>
+                  </div>
+                </div>
+  
+                <!-- Card content -->
+                <div class="card-body card-body-cascade">
+                  <div class="progress mb-3">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="card-text">Better than last week (25%)</p>
+                </div>
+  
+              </div>
+              <!-- Card -->
+  
+            </div>
+            <!-- First column -->
+  
+            <!-- Second column -->
+            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+  
+              <!-- Card -->
+              <div class="card card-cascade cascading-admin-card">
+  
+                <!-- Card Data -->
+                <div class="admin-up">
+                  <i class="fas fa-chart-line warning-color mr-3 z-depth-2"></i>
+                  <div class="data">
+                    <p class="text-uppercase">Transactions</p>
+                    <h4 class="font-weight-bold "><span id="transactionTotal"></span></h4>
+                  </div>
+                </div>
+  
+                <!-- Card content -->
+                <div class="card-body card-body-cascade">
+                  <div class="progress mb-3">
+                    <div class="progress-bar red accent-2" role="progressbar" style="width: 25%" aria-valuenow="25"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="card-text">Worse than last week (25%)</p>
+                </div>
+  
+              </div>
+              <!-- Card -->
+  
+            </div>
+            <!-- Second column -->
+  
+            <!-- Third column -->
+            <div class="col-xl-3 col-md-6 mb-md-0 mb-4">
+  
+              <!-- Card -->
+              <div class="card card-cascade cascading-admin-card">
+  
+                <!-- Card Data -->
+                <div class="admin-up">
+                  <i class="fas fa-chart-pie light-blue lighten-1 mr-3 z-depth-2"></i>
+                  <div class="data">
+                    <p class="text-uppercase">Sources</p>
+                    <h4 class="font-weight-bold "><span id="sourceTotal"></span></h4>
+                  </div>
+                </div>
+  
+                <!-- Card content -->
+                <div class="card-body card-body-cascade">
+                  <div class="progress mb-3">
+                    <div class="progress-bar red accent-2" role="progressbar" style="width: 75%" aria-valuenow="75"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="card-text">Worse than last week (75%)</p>
+                </div>
+  
+              </div>
+              <!-- Card -->
+  
+            </div>
+            <!-- Third column -->
+  
+            <!-- Fourth column -->
+            <div class="col-xl-3 col-md-6 mb-0">
+  
+              <!-- Card -->
+              <div class="card card-cascade cascading-admin-card">
+  
+                <!-- Card Data -->
+                <div class="admin-up">
+                  <i class="fas fa-chart-bar red accent-2 mr-3 z-depth-2"></i>
+                  <div class="data">
+                    <p class="text-uppercase">Member Since</p>
+                    <h4 class="font-weight-bold "><span id="memberSince"></span></h4>
+                  </div>
+                </div>
+  
+                <!-- Card content -->
+                <div class="card-body card-body-cascade">
+                  <div class="progress mb-3">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="card-text">Better than last week (25%)</p>
+                </div>
+  
+              </div>
+              <!-- Card -->
+  
+            </div>
+            <!-- Fourth column -->
+  
+          </div>
+          <!-- First row -->
+  
+        </section>
+        <!-- Section: Analytical panel -->
+	
+      <!-- Transactions Section: data tables -->
+      <div>
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-lg-12 col-md-12">
+
+            <!-- Panel -->
+            <div class="card mb-lg-0 mb-4">
+
+              <div class="card-header white-text primary-color">
+                <h5 class="font-weight-500 my-1">New Transaction</h5>
+              </div>
+
+              <div class="card-body">
+
 				<form id="transaction">
 					<div class="form-group">
 						<label for="Amount">Amount:</label>
@@ -46,18 +325,101 @@
 							<div class="form-group">
 								<br>
 								<label for="category">Select Income Source: </label>
-								<select class="custom-select" id="source">
+								<select id="source">
 								</select>
 							</div>
 							<br />
 							<button type="submit" class="btn btn-success submit">Submit</button>
 						</div>
 					</div>
-				</form>
-			</div>
-		</div>
-	<!-- Custom Script -->
-	<script src="js/transactions.js" type="text/javascript"></script>
-</body>
+				</form>				
 
+            </div>
+            <!-- Panel -->
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Source Section: data tables -->
+    </div>
+
+  </main>
+  <!-- Main layout -->
+
+  <!-- Footer -->
+  <footer class="page-footer pt-0 mt-5 rgba-stylish-light">
+
+    <!-- Copyright -->
+    <div class="footer-copyright py-3 text-center">
+      <div class="container-fluid">
+        © 2019 Copyright: <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> GigTracer.com </a>
+      </div>
+    </div>
+
+  </footer>
+  <!-- Footer -->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script src="js/jquery-3.4.0.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  
+  <!-- Numeral Script -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+
+  <!-- Custom Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="js/transactions_edit.js" type="text/javascript"></script>
+<!--      -->
+	
+  <!-- Initializations -->
+  <script>
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
+    var container = document.querySelector('.custom-scrollbar');
+    var ps = new PerfectScrollbar(container, {
+      wheelSpeed: 2,
+      wheelPropagation: true,
+      minScrollbarLength: 20
+    });
+
+    $(function () {
+      //$('#dark-mode').on('click', function (e) {
+
+        //e.preventDefault();
+
+        $('footer, .card').toggleClass('dark-card-admin');
+        $('body, .navbar').toggleClass('white-skin navy-blue-skin');
+        //$(this).toggleClass('white text-dark btn-outline-black');
+        $('body').toggleClass('dark-bg-admin');
+        //$('h6, .card, p, td, th, i, li a, h4, input, label').not(
+        //  '#slide-out i, #slide-out a, .dropdown-item i, .dropdown-item').toggleClass('text-white');
+        $('h6, .card, p, td, th, li a, h4, label, .table').addClass('text-white');
+        $('.dropdown-item i, .dropdown-item').toggleClass('text-dark');
+        $('.btn-dash').toggleClass('grey blue').toggleClass('lighten-3 darken-3');
+        $('.gradient-card-header').toggleClass('white black lighten-4');
+        $('.list-panel a').toggleClass('navy-blue-bg-a text-white').toggleClass('list-group-border');
+		
+	 	$( "#datepicker" ).datepicker();
+
+    //  });
+    });
+    // Material Select Initialization
+    $(document).ready(function () {
+      $('.mdb-select').material_select();
+    });
+  </script>
+</body>
 </html>
