@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "mysql",
+    "password": "root",
     "database": "gigTracer_db",
     "host": "127.0.0.1",
+    "port": 8889,
 
     "dialect": "mysql"
   },
