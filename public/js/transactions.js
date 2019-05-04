@@ -1,5 +1,8 @@
-$(document).ready(function() {
+//$(document).ready(function() {
   // Getting jQuery references to the transaction description, amount, form, and source select
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function() {
+
   var descriptionInput = $("#description");
   var amountInput = $("#amount");
   var dateInput = $("#datepicker");
@@ -26,7 +29,7 @@ $(document).ready(function() {
   }
 
   // Getting the Sources, and their transactions
-  getSources();
+  getSourcesT();
 
   // A function for handling what happens when the form to create a new transaction is submitted
   function handleFormSubmit(event) {
@@ -45,7 +48,7 @@ $(document).ready(function() {
         .trim(),
       date: dateInput
         .val(),
-        // .trim(),
+        //.trim(),
       SourceId: sourceSelect.val()
     };
 
@@ -83,14 +86,14 @@ $(document).ready(function() {
       return;
     }
     $.get(queryUrl, function(data) {
-      console.log(data.SourceId);
+      console.log(data.sourceId);
       if (data) {
         // console.log(data.sourceId || data.id);
         // If this transaction exists, prefill our Transactions forms with its data
         amountInput.val(data.amount);
         descriptionInput.val(data.description);
         dateInput.val(data.date);
-        sourceId = data.SourceId || data.id;
+        sourceId = data.sourceId || data.id;
         // If we have a transaction with this id, set a flag for us to know to update the transaction
         // when we hit submit
         updating = true;
@@ -99,19 +102,19 @@ $(document).ready(function() {
   }
 
   // A function to get Sources and then render our list of Sources
-  function getSources() {
-    $.get("/api/sources", renderSourceList);
+  function getSourcesT() {
+    $.get("/api/sources", renderSourceListT);
   }
   // Function to either render a list of Sources, or if there are none, direct the user to the page
   // to create an source first
-  function renderSourceList(data) {
+  function renderSourceListT(data) {
     if (!data.length) {
       window.location.href = "/sources";
     }
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
-      rowsToAdd.push(createSourceRow(data[i]));
+      rowsToAdd.push(createSourceRowT(data[i]));
     }
     sourceSelect.empty();
     // console.log(rowsToAdd);
@@ -121,7 +124,7 @@ $(document).ready(function() {
   }
 
   // Creates the source options in the dropdown
-  function createSourceRow(source) {
+  function createSourceRowT(source) {
     var listOption = $("<option>");
     listOption.attr("value", source.id);
     listOption.text(source.name);
@@ -139,4 +142,5 @@ $(document).ready(function() {
         window.location.href = "/home";
       });
   }
+	
 });

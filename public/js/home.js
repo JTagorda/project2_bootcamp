@@ -132,7 +132,7 @@ $(document).ready(function() {
     newTransactionDate.text(formattedDate);
 	newTransactionSource.text(transaction.Source.name);
     newTransactionDescription.text(transaction.description + " ");
-    newTransactionAmount.text(transaction.amount);
+    newTransactionAmount.text("$" + transaction.amount);
     //newTransactionEdit.text(editBtn);
     //newTransactionDelete.text(deleteBtn);
 	  
